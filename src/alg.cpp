@@ -2,7 +2,6 @@
 #include <string>
 #include <map>
 #include "tstack.h"
-using namespace std;
 int getPriority(char symbol) {
     switch (symbol) {
     case '(':
@@ -29,18 +28,16 @@ int getPriority(char symbol) {
 }
 std::string infx2pstfx(std::string inf) {
     TStack<char, 100> stack1;
-    string result = "";
+    std::string result = "";
     for (int i = 0; i < inf.length(); i++) {
         if (inf[i] >= '0' && inf[i] <= '9') {
-            if (inf[i + 1] >= '0' && inf[i + 1] <= '9' ) {
+            if (inf[i + 1] >= '0' && inf[i + 1] <= '9') {
                 result += inf[i];
-            }
-            else {
+            } else {
                 result += inf[i];
                 result += ' ';
             }
-        }
-        else {
+        } else {
             if (inf[i] == '(')
                 stack1.push('(');
             else if (inf[i] == ')') {
@@ -51,8 +48,7 @@ std::string infx2pstfx(std::string inf) {
                 }
                 if (!stack1.isEmpty())
                     stack1.pop();
-            }
-            else {
+            } else {
                 if (getPriority(inf[i]) > getPriority(stack1.get())) {
                     stack1.push(inf[i]);
                 }
@@ -95,15 +91,14 @@ int calculate(int a, int b, char symbol) {
 int eval(std::string pref) {
     TStack<int, 100> stack2;
     int result = 0;
-    string nums="";
+    std::string nums="";
     for (int i = 0; i < pref.length(); i++) {
         if (pref[i] >= '0' && pref[i] <= '9') {
             if (pref[i + 1] >= '0' && pref[i + 1] <= '9') {
                 nums += pref[i];
-            }
-            else {
+            } else {
                 nums += pref[i];
-                stack2.push(stoi(nums));
+                stack2.push(std::stoi(nums));
                 nums = "";
             }
         }
