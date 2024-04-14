@@ -29,6 +29,7 @@ int getPriority(char symbol) {
 std::string infx2pstfx(std::string inf) {
     TStack<char, 100> stack1;
     std::string result = "";
+    bool empty = stack1.isEmpty();
     for (int i = 0; i < inf.length(); i++) {
         if (inf[i] >= '0' && inf[i] <= '9') {
             if (inf[i + 1] >= '0' && inf[i + 1] <= '9') {
@@ -51,9 +52,8 @@ std::string infx2pstfx(std::string inf) {
             } else {
                 if (getPriority(inf[i]) > getPriority(stack1.get())) {
                     stack1.push(inf[i]);
-                }
-                else if (getPriority(inf[i]) <= getPriority(stack1.get())) {
-                    while (!stack1.isEmpty() && getPriority(inf[i]) <= getPriority(stack1.get())) {
+                } else if (getPriority(inf[i]) <= getPriority(stack1.get())) {
+                    while (!empty && getPriority(inf[i]) <= getPriority(stack1.get())) {
                         result += stack1.get();
                         result += ' ';
                         stack1.pop();
@@ -91,7 +91,7 @@ int calculate(int a, int b, char symbol) {
 int eval(std::string pref) {
     TStack<int, 100> stack2;
     int result = 0;
-    std::string nums="";
+    std::string nums = "";
     for (int i = 0; i < pref.length(); i++) {
         if (pref[i] >= '0' && pref[i] <= '9') {
             if (pref[i + 1] >= '0' && pref[i + 1] <= '9') {
@@ -101,8 +101,7 @@ int eval(std::string pref) {
                 stack2.push(std::stoi(nums));
                 nums = "";
             }
-        }
-        else if (pref[i] == ' ')
+        } else if (pref[i] == ' ')
             continue;
         else {
             int a = stack2.get();
