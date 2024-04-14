@@ -22,14 +22,12 @@ int getPriority(char symbol) {
     case '/':
         return 3;
         break;
-    default:
-        break;
-    }
 }
 std::string infx2pstfx(std::string inf) {
     TStack<char, 100> stack1;
     std::string result = "";
     bool empty = stack1.isEmpty();
+    int get = getPriority(inf[i]);
     for (int i = 0; i < inf.length(); i++) {
         if (inf[i] >= '0' && inf[i] <= '9') {
             if (inf[i + 1] >= '0' && inf[i + 1] <= '9') {
@@ -39,20 +37,21 @@ std::string infx2pstfx(std::string inf) {
                 result += ' ';
             }
         } else {
-            if (inf[i] == '(')
+            if (inf[i] == '(') {
                 stack1.push('(');
-            else if (inf[i] == ')') {
+            } else if (inf[i] == ')') {
                 while (!stack1.isEmpty() && stack1.get() != '(') {
                     result += stack1.get();
                     result += ' ';
                     stack1.pop();
                 }
-                if (!stack1.isEmpty())
+                if (!stack1.isEmpty()) {
                     stack1.pop();
+                }
             } else {
-                if (getPriority(inf[i]) > getPriority(stack1.get())) {
+                if (get > getPriority(stack1.get())) {
                     stack1.push(inf[i]);
-                } else if (getPriority(inf[i]) <= getPriority(stack1.get())) {
+                } else if (get <= getPriority(stack1.get())) {
                     while (!empty && getPriority(inf[i]) <= getPriority(stack1.get())) {
                         result += stack1.get();
                         result += ' ';
@@ -84,9 +83,6 @@ int calculate(int a, int b, char symbol) {
     case '/':
         return b / a;
         break;
-    default:
-        break;
-    }
 }
 int eval(std::string pref) {
     TStack<int, 100> stack2;
@@ -101,8 +97,9 @@ int eval(std::string pref) {
                 stack2.push(std::stoi(nums));
                 nums = "";
             }
-        } else if (pref[i] == ' ')
+        } else if (pref[i] == ' '){
             continue;
+        }
         else {
             int a = stack2.get();
             stack2.pop();
