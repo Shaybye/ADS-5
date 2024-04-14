@@ -4,20 +4,21 @@
 
 template<typename T, int size>
 class TStack {
-  private:
+   private:
     T* arr;
     int top;
-  public:
+
+   public:
     TStack() {
         arr = new T[size];
     }
     ~TStack() {
         delete[] arr;
     }
-    bool isEmpty() const{
+    bool isEmpty() const {
         return top == -1
     }
-    bool isFull() const{
+    bool isFull() const {
         return top == size;
     }
     T pop() {
