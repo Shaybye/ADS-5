@@ -52,7 +52,7 @@ std::string infx2pstfx(std::string inf) {
                 if (get > getPriority(stack1.get())) {
                     stack1.push(inf[i]);
                 } else if (get <= getPriority(stack1.get())) {
-                    while (!empty && getPriority(inf[i]) <= getPriority(stack1.get())) {
+                    while (!empty && get <= getPriority(stack1.get())) {
                         result += stack1.get();
                         result += ' ';
                         stack1.pop();
@@ -97,10 +97,9 @@ int eval(std::string pref) {
                 stack2.push(std::stoi(nums));
                 nums = "";
             }
-        } else if (pref[i] == ' '){
+        } else if (pref[i] == ' ') {
             continue;
-        }
-        else {
+        } else {
             int a = stack2.get();
             stack2.pop();
             int b = stack2.get();
