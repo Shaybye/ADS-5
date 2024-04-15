@@ -23,16 +23,16 @@ int getPriority(char symbol) {
         return 3;
         break;
     default:
-        return;
+        return 0;
         break;
-    }   
+    }
 }
 std::string infx2pstfx(std::string inf) {
     TStack<char, 100> stack1;
     std::string result = "";
     bool empty = stack1.isEmpty();
-    int get = getPriority(inf[i]);
     for (int i = 0; i < inf.length(); i++) {
+        int get = getPriority(inf[i]);
         if (inf[i] >= '0' && inf[i] <= '9') {
             if (inf[i + 1] >= '0' && inf[i + 1] <= '9') {
                 result += inf[i];
@@ -86,6 +86,9 @@ int calculate(const int a, const int b, const char symbol) {
         break;
     case '/':
         return b / a;
+        break;
+    default:
+        return 0;
         break;
     }
 }
