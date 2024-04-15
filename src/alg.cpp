@@ -69,6 +69,7 @@ std::string infx2pstfx(std::string inf) {
         result += ' ';
         stack1.pop();
     }
+    result.pop_back();
     return result;
 }
 int calculate(const int a, const int b, const char symbol) {
