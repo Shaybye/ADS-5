@@ -30,9 +30,7 @@ int getPriority(char symbol) {
 std::string infx2pstfx(std::string inf) {
     TStack<char, 100> stack1;
     std::string result = "";
-    bool empty = stack1.isEmpty();
     for (int i = 0; i < inf.length(); i++) {
-        int get = getPriority(inf[i]);
         if (inf[i] >= '0' && inf[i] <= '9') {
             if (inf[i + 1] >= '0' && inf[i + 1] <= '9') {
                 result += inf[i];
@@ -53,10 +51,10 @@ std::string infx2pstfx(std::string inf) {
                     stack1.pop();
                 }
             } else {
-                if (get > getPriority(stack1.get())) {
+                if (getPriority(inf[i]) > getPriority(stack1.get())) {
                     stack1.push(inf[i]);
-                } else if (get <= getPriority(stack1.get())) {
-                    while (!empty && get <= getPriority(stack1.get())) {
+                } else {
+                    while (getPriority(inf[i]) <= getPriority(stack1.get())) {
                         result += stack1.get();
                         result += ' ';
                         stack1.pop();
