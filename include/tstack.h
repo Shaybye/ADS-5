@@ -7,10 +7,10 @@ class TStack {
  private:
     T* arr;
     int top;
-
  public:
     TStack() {
         arr = new T[size];
+        top = -1;
     }
     ~TStack() {
         delete[] arr;
@@ -18,17 +18,28 @@ class TStack {
     bool isEmpty() const {
         return top == -1;
     }
-    bool isFull() const {
-        return top == size;
-    }
     T pop() {
-        return arr[top--];
+        if (top != -1) {
+            T element = arr[top];
+            top--;
+            return element;
+        }
+        else {
+            return T();
+        }
     }
-    T get() {
-        return arr[top];
+    T get() const {
+        if (top == -1) {
+            return T();
+        }
+        else {
+            return arr[top]
+        }
     }
     void push(T item) {
-        arr[++top] = item;
+        if (top != size - 1) {
+            arr[++top] = item;
+        }
     }
 };
 
