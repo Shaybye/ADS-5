@@ -23,16 +23,14 @@ class TStack {
             T element = arr[top];
             top--;
             return element;
-        }
-        else {
+        } else {
             return T();
         }
     }
     T get() const {
         if (top == -1) {
             return T();
-        }
-        else {
+        } else {
             return arr[top]
         }
     }
