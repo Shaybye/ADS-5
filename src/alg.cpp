@@ -22,6 +22,10 @@ int getPriority(char symbol) {
     case '/':
         return 3;
         break;
+    default:
+        return;
+        break;
+    }   
 }
 std::string infx2pstfx(std::string inf) {
     TStack<char, 100> stack1;
@@ -69,7 +73,7 @@ std::string infx2pstfx(std::string inf) {
     }
     return result;
 }
-int calculate(int a, int b, char symbol) {
+int calculate(const int a, const int b, const char symbol) {
     switch (symbol) {
     case '+':
         return b + a;
@@ -83,6 +87,7 @@ int calculate(int a, int b, char symbol) {
     case '/':
         return b / a;
         break;
+    }
 }
 int eval(std::string pref) {
     TStack<int, 100> stack2;
