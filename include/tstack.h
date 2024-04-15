@@ -32,7 +32,7 @@ class TStack {
         if (top == -1) {
             return T();
         } else {
-            return arr[top]
+            return arr[top];
         }
     }
     void push(T item) {
